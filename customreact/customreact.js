@@ -10,11 +10,18 @@ const reactElement = {
 }
 
 function customRender(reactElement, mainContainer) {
+//     const domElement = document.createElement(reactElement.type)
+//     domElement.setAttribute('href', reactElement.props.href)
+//     domElement.setAttribute('target', reactElement.props.target)
+//     domElement.innerHTML = reactElement.children
+//     mainContainer.appendChild(domElement)
     const domElement = document.createElement(reactElement.type)
-    domElement.setAttribute('href', reactElement.props.href)
-    domElement.setAttribute('target', reactElement.props.target)
     domElement.innerHTML = reactElement.children
-    mainContainer.appendChild(domElement)
+    for (const prop in reactElement.props) {
+        if (prop === 'children')continue;
+        domElement.setAttribute(prop, reactElement.props);
+    }
+    mainContainer.appendChild(domElement);
 }
 
 customRender(reactElement, mainContainer)
